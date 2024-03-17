@@ -44,8 +44,8 @@ const addNews = async () => {
     }
 }
 
-newsForm.on("submit", (event) => {
+newsForm.on("submit", async (event) => {
     event.preventDefault();
-    addNews();
-    getNews();
+    await addNews();
+    await getNews();
 });
