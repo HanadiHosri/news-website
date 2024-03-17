@@ -1,4 +1,6 @@
 const newsDiv = $("#news");
+const newsInput = $("#news-input");
+const newsForm = $("#news-form");
 
 const getNews = () => {
     fetch("http://localhost/news-website/backend/read.php", {
@@ -23,3 +25,27 @@ const displayNews = (data) => {
 };
 
 getNews();
+
+const addNews = async () => {
+    try {
+        const formData = new FormData();
+        formData.append('details', newsInput.val());
+
+        const response = await fetch("http://localhost/news-website/backend/add.php", {
+            method: "POST",
+            body: formData
+        });
+
+        const responseData = await response.text();
+        console.log(responseData);
+    } catch (error) {
+        console.error(error);
+        alert("Error occured while sending request");
+    }
+}
+
+newsForm.on("submit", (event) => {
+    event.preventDefault();
+    addNews();
+    getNews();
+});
