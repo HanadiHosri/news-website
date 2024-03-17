@@ -14,12 +14,10 @@ const getNews = () => {
 
 
 const displayNews = (data) => {
-    newsDiv.innerHTML = "";
+    newsDiv.empty();
     data.details?.forEach((detail) => {
-        const storyDiv = document.createElement("div");
-        const storyText = document.createElement("p");
-        storyText.textContent = detail;
-        storyDiv.append(storyText);
+        const storyText = $("<li></li>").text(detail); 
+        const storyDiv = $("<ul></ul>").append(storyText);
         newsDiv.append(storyDiv);
     });
 };
