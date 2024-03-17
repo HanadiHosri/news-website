@@ -1,6 +1,9 @@
 <?php
 include('connection.php');
 
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Credentials: true');
+
 $query = $mysqli->prepare('select details from stories');
 $query->execute();
 $query->store_result();
