@@ -18,8 +18,8 @@ const getNews = () => {
 const displayNews = (data) => {
     newsDiv.empty();
     data.details?.forEach((detail) => {
-        const storyText = $("<li></li>").text(detail); 
-        const storyDiv = $("<ul></ul>").append(storyText);
+        const storyText = $("<li></li>").addClass("list-group-item").text(detail); 
+        const storyDiv = $("<ul></ul>").addClass("list-group").append(storyText);
         newsDiv.append(storyDiv);
     });
 };
