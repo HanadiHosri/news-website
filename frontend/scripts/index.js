@@ -1,16 +1,27 @@
-const news = [];
+const newsDiv = $("#news");
 
-fetch("http://localhost/news-website/backend/read.php", {
-    method: "GET",
-    headers: {"Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Credentials": "true",
-    "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT",
-    "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"}
-    })
+const getNews = () => {
+    fetch("http://localhost/news-website/backend/read.php", {
+    method: "GET"})
     .then(response => response.json())
     .then(data => {
-        news.push(data.message.details)
+        displayNews(data);
     })
-    .catch(error => {console.log(error)})
+    .catch(error => {
+        console.log(error);
+    });
+};
 
-console.log(news);
+
+const displayNews = (data) => {
+    newsDiv.innerHTML = "";
+    data.details?.forEach((detail) => {
+        const storyDiv = document.createElement("div");
+        const storyText = document.createElement("p");
+        storyText.textContent = detail;
+        storyDiv.append(storyText);
+        newsDiv.append(storyDiv);
+    });
+};
+
+getNews();
